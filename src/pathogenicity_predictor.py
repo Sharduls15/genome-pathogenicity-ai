@@ -279,12 +279,14 @@ class PathogenicityPredictor:
                 score += 0.05  # Premature stop codons
         
         # Ensure score is in valid range
-        score = max(0.0, min(1.0, score))\n        
+        score = max(0.0, min(1.0, score))
+        
         # Classify based on score
         if score < 0.2:
             classification = 'benign'
         elif score < 0.4:
-            classification = 'likely_benign'\n        elif score < 0.6:
+            classification = 'likely_benign'
+        elif score < 0.6:
             classification = 'uncertain_significance'
         elif score < 0.8:
             classification = 'likely_pathogenic'

@@ -1,0 +1,21 @@
+=== Genome Pathogenicity Prediction Results ===
+
+Pathogenicity Score: 0.4647
+Pathogenicity Type: uncertain_significance
+Confidence: 0.305
+
+Sequence Information:
+  Length: 917 bp
+  GC Content: 38.17%
+
+Detailed Analysis:
+  prob_benign: 0.16
+  prob_likely_benign: 0.255
+  prob_likely_pathogenic: 0.11
+  prob_pathogenic: 0.17
+  prob_uncertain_significance: 0.305
+  top_features: [{'feature': 'entropy', 'importance': 0.014589956226990518}, {'feature': 'complexity', 'importance': 0.012768215696126746}, {'feature': 'is_frameshift', 'importance': 0.012182178701520403}, {'feature': 'a_frequency', 'importance': 0.011325294584452422}, {'feature': 't_frequency', 'importance': 0.011263305073289811}, {'feature': 'gc_content', 'importance': 0.010950257368519284}, {'feature': 'g_frequency', 'importance': 0.010925562029892635}, {'feature': 'frame_2_hydrophobic_freq', 'importance': 0.010893126656167193}, {'feature': 'c_frequency', 'importance': 0.010856095775295081}, {'feature': 'frame_2_polar_freq', 'importance': 0.010497147271679616}]
+
+Model Information:
+  Model: TRAINED-PATHO
+  Version: 1.0.0
