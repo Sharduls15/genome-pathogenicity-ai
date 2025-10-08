@@ -1,0 +1,153 @@
+# Genome Pathogenicity AI Predictor Configuration
+
+# Application settings
+app:
+  name: "Genome Pathogenicity AI Predictor"
+  version: "1.0.0"
+  debug: false
+  log_level: "INFO"
+
+# Model settings
+model:
+  default_model: "default"
+  models_directory: "models"
+  
+  # Model parameters
+  random_forest:
+    n_estimators: 200
+    random_state: 42
+    n_jobs: -1
+    class_weight: "balanced"
+  
+  # Feature extraction settings
+  features:
+    kmer_sizes: [3, 4]
+    max_4mers: 50  # Limit number of 4-mers to prevent feature explosion
+    min_orf_length: 30  # Minimum ORF length in amino acids
+    
+  # Pathogenicity classification thresholds
+  thresholds:
+    benign: 0.2
+    likely_benign: 0.4
+    uncertain_significance: 0.6
+    likely_pathogenic: 0.8
+    pathogenic: 1.0
+
+# Data settings
+data:
+  input_formats: ["fasta", "fastq", "text"]
+  max_sequence_length: 1000000  # Maximum sequence length to process
+  
+  # Training data paths
+  training:
+    features_file: "data/training_features.csv"
+    labels_file: "data/training_labels.csv"
+    test_split: 0.2
+    validation_split: 0.1
+    random_state: 42
+
+# Sequence processing
+sequence:
+  # Valid nucleotides
+  valid_nucleotides: ["A", "T", "C", "G", "N"]
+  
+  # Cleaning options
+  clean_sequence: true
+  remove_ambiguous: false  # Keep N nucleotides
+  
+  # Translation settings
+  genetic_code: "standard"
+  reading_frames: [0, 1, 2]
+  start_codons: ["ATG"]
+  stop_codons: ["TAA", "TAG", "TGA"]
+
+# Feature extraction
+features:
+  # Basic sequence features
+  basic:
+    length: true
+    gc_content: true
+    nucleotide_frequencies: true
+    complexity: true
+    entropy: true
+  
+  # K-mer features
+  kmers:
+    enabled: true
+    sizes: [3]  # Start with 3-mers only for performance
+    normalize: true
+  
+  # Protein features
+  protein:
+    enabled: true
+    all_frames: true
+    amino_acid_composition: true
+    stop_codons: true
+  
+  # ORF features
+  orfs:
+    enabled: true
+    min_length: 30
+    max_orfs: 100  # Limit number of ORFs to analyze
+
+# Performance settings
+performance:
+  batch_size: 32
+  max_workers: null  # Use all available CPU cores
+  memory_limit: "8GB"
+  
+  # Caching
+  cache_features: true
+  cache_directory: "cache"
+
+# Output settings
+output:
+  format: "json"  # json, yaml, csv
+  precision: 4  # Decimal places for scores
+  include_confidence: true
+  include_detailed: false  # Include detailed predictions by default
+  
+  # File output
+  save_predictions: false
+  output_directory: "results"
+  timestamp_files: true
+
+# API settings (if running as web service)
+api:
+  host: "localhost"
+  port: 8000
+  workers: 4
+  timeout: 300  # seconds
+  max_request_size: "100MB"
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/genome_pathogenicity.log"
+  max_file_size: "10MB"
+  backup_count: 5
+  
+  # Module-specific log levels
+  modules:
+    genome_analyzer: "INFO"
+    pathogenicity_predictor: "INFO"
+    main: "INFO"
+
+# Development settings
+development:
+  enable_profiling: false
+  sample_data_size: 1000
+  quick_test: false
+  
+  # Debugging
+  debug_features: false
+  save_intermediate: false
+  verbose_errors: true
+
+# Production settings
+production:
+  optimize_memory: true
+  preload_models: true
+  batch_processing: true
+  monitoring: true
