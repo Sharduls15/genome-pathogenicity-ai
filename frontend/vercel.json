@@ -1,12 +1,6 @@
 {
   "name": "genome-pathogenicity-ai",
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
+  "framework": "nextjs",
   "routes": [
     {
       "src": "/(.*)",
@@ -17,7 +11,7 @@
     "NEXT_PUBLIC_USE_MOCK_API": "true"
   },
   "functions": {
-    "pages/api/**/*.js": {
+    "api/**/*.js": {
       "maxDuration": 30
     }
   }
